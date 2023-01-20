@@ -2,6 +2,7 @@ package com.universales.prueba2.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -11,6 +12,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -43,7 +45,18 @@ public class Usuario implements Serializable{
 	@Column(name="FECHA_NACIMIENTO")
 	private Date fecha;
 	
+	@OneToMany(mappedBy="idTelefono")
+	private List<Telefono> telefonolist;
 	
+
+	
+	public List<Telefono> getTelefonolist() {
+		return telefonolist;
+	}
+
+	public void setTelefonolist(List<Telefono> telefonolist) {
+		this.telefonolist = telefonolist;
+	}
 
 	public Date getFecha() {
 		return fecha;
