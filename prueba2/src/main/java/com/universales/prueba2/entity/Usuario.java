@@ -51,8 +51,17 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy="idUsuario")
 	private List<Correo> correolist;
 	
-
+	@OneToMany(mappedBy="idUsuario")
+	private List<Empleado> empleadolist;
 	
+	public List<Empleado> getEmpleadolist() {
+		return empleadolist;
+	}
+
+	public void setEmpleadolist(List<Empleado> empleadolist) {
+		this.empleadolist = empleadolist;
+	}
+
 	public List<Correo> getCorreolist() {
 		return correolist;
 	}

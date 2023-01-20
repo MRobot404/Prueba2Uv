@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.universales.prueba2.entity.Correo;
+
 import com.universales.prueba2.entity.Empleado;
 import com.universales.prueba2.repository.EmpleadoRepository;
 import com.universales.prueba2.wsint.EmpleadoInt;

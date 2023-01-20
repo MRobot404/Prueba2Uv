@@ -32,7 +32,7 @@ public class Empleado implements Serializable{
 	private Integer idEmpleado;
 	
 	@Column(name = "ID_USUARIO")
-	private String idUsuario;
+	private Integer idUsuario;
 	
 	@Column(name = "CODIGO")
 	private Integer codigo;
@@ -49,11 +49,11 @@ public class Empleado implements Serializable{
 		this.idEmpleado = idEmpleado;
 	}
 
-	public String getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

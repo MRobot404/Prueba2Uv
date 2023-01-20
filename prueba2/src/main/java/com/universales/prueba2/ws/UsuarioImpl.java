@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.universales.prueba2.entity.Correo;
+import com.universales.prueba2.entity.Empleado;
 import com.universales.prueba2.entity.Telefono;
 import com.universales.prueba2.entity.Usuario;
 import com.universales.prueba2.repository.CorreoRepository;
+import com.universales.prueba2.repository.EmpleadoRepository;
 import com.universales.prueba2.repository.TelefonoRepository;
 import com.universales.prueba2.repository.UsuarioRepository;
 import com.universales.prueba2.wsint.UsuarioInt;
@@ -26,6 +28,9 @@ public class UsuarioImpl implements UsuarioInt{
 	
 	@Autowired
 	CorreoRepository correoRepository;
+	
+	@Autowired
+	EmpleadoRepository empleadoRepository;
 	
 	@Override
 	public List<Usuario>buscarUsuario(){
@@ -53,6 +58,16 @@ public class UsuarioImpl implements UsuarioInt{
 	
 	correoRepository.saveAll(correos);
 	usuario.setCorreolist(correos);
+	
+	List<Empleado> empleados=usuario.getEmpleadolist();
+	usuario.setEmpleadolist(null);
+	usuarioRepository.save(usuario);
+	for(Empleado emp:empleados) {
+		emp.setIdUsuario(usuario.getIdUsuario());
+	}
+	
+	empleadoRepository.saveAll(empleados);
+	usuario.setCorreolist(correos);
 		return usuario;
 	}
 	
@@ -62,6 +77,7 @@ public class UsuarioImpl implements UsuarioInt{
 		if(usuarios.isPresent()) {
 			telefonoRepository.deleteAll(usuarios.get().getTelefonolist());
 			correoRepository.deleteAll(usuarios.get().getCorreolist());
+			empleadoRepository.deleteAll(usuarios.get().getEmpleadolist());
 			usuarioRepository.delete(usuarios.get());
 		}
 		
