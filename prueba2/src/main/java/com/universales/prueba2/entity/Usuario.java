@@ -45,11 +45,22 @@ public class Usuario implements Serializable{
 	@Column(name="FECHA_NACIMIENTO")
 	private Date fecha;
 	
-	@OneToMany(mappedBy="idTelefono")
+	@OneToMany(mappedBy="idUsuario")
 	private List<Telefono> telefonolist;
+	
+	@OneToMany(mappedBy="idUsuario")
+	private List<Correo> correolist;
 	
 
 	
+	public List<Correo> getCorreolist() {
+		return correolist;
+	}
+
+	public void setCorreolist(List<Correo> correolist) {
+		this.correolist = correolist;
+	}
+
 	public List<Telefono> getTelefonolist() {
 		return telefonolist;
 	}

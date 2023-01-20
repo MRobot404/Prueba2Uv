@@ -22,7 +22,7 @@ public class Telefono implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@GenericGenerator(name = "ID_TELEFONO", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "test_seq29"), @Parameter(name = "initial_value", value = "1"),
+			@Parameter(name = "sequence_name", value = "test_seq28"), @Parameter(name = "initial_value", value = "1"),
 			@Parameter(name = "increment_size", value = "1"), @Parameter(name = "schema", value = "SYSTEM") })
 	@Id
 	@Basic(optional = false)
@@ -31,15 +31,12 @@ public class Telefono implements Serializable {
 	private Integer idTelefono;
 	
 	@Column(name="TELEFONO")
-	@GeneratedValue(generator = "TELEFONO")
 	private int telefono;
 	
 	@Column(name="EXTENSION")
-	@GeneratedValue(generator = "EXTENSION")
 	private int extension;
 	
 	@Column(name="ID_USUARIO")
-	@GeneratedValue(generator = "ID_USUARIO")
 	private int idUsuario;
 
 	public Integer getIdTelefono() {
