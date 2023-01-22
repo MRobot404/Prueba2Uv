@@ -1,4 +1,4 @@
---Creacion de tablasID_EMPLEADO
+--Creacion de tablas
 DROP TABLE usuario;
 CREATE TABLE USUARIO(
 ID_USUARIO INTEGER NOT NULL,
@@ -8,6 +8,9 @@ NIT NUMBER(13),
 FECHA_NACIMIENTO DATE,
 CONSTRAINT pk_usuarios primary key(ID_USUARIO)
 );
+
+Alter table USUARIO
+drop column password;
 
 DROP TABLE EMPLEADO;
 CREATE TABLE EMPLEADO(

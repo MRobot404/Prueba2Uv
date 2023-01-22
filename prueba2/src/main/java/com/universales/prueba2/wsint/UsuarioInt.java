@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universales.prueba2.entity.Usuario;
 
+
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin
@@ -26,4 +27,7 @@ public interface UsuarioInt {
 	
 	@DeleteMapping(path="/eliminar/{id_usuario}")
 	public void eliminar(@PathVariable ("id_usuario")Integer id_usuario);
+	
+	@GetMapping(path="/buscar/por/{nombre}/{apellido}")
+	public List<Usuario>buscarPorNombreYApellido(@PathVariable String nombre,@PathVariable String apellido);
 }
