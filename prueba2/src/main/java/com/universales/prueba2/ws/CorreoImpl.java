@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.universales.prueba2.entity.Correo;
+import com.universales.prueba2.entity.Telefono;
 import com.universales.prueba2.repository.CorreoRepository;
 import com.universales.prueba2.wsint.CorreoInt;
 
@@ -34,5 +37,10 @@ public class CorreoImpl implements CorreoInt {
 		}
 		
 	}
-
+	
+	@Override
+	public List<Correo>buscarPorIdCorreo(Integer idCorreo){
+		return correoRepository.findByIdCorreo(idCorreo);
+	}
+	
 }

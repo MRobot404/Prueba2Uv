@@ -11,4 +11,5 @@ import com.universales.prueba2.entity.Usuario;
 @Repository("usuarioRepository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Serializable> {
 	public List<Usuario> findByNombreAndApellido(String nombre, String apellido);
+	public List<Usuario> findByidUsuario(int idUsuario);
 }

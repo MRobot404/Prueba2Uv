@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 import com.universales.prueba2.entity.Empleado;
+import com.universales.prueba2.entity.Rol;
 import com.universales.prueba2.repository.EmpleadoRepository;
 import com.universales.prueba2.wsint.EmpleadoInt;
 @Component
@@ -32,5 +33,10 @@ public class EmpleadoImpl implements EmpleadoInt {
 			empleadoRepository.delete(empleados.get());
 		}
 		
+	}
+	
+	@Override
+	public List<Empleado>buscarPorIdEmpleado(Integer idEmpleado){
+		return empleadoRepository.findByIdEmpleado(idEmpleado);
 	}
 }

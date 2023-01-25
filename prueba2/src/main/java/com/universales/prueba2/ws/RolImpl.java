@@ -35,4 +35,9 @@ public class RolImpl implements RolInt {
 		}
 		
 	}
+	
+	@Override
+	public List<Rol>buscarPorIdRol(Integer idRol){
+		return rolRepository.findByIdRol(idRol);
+	}
 }

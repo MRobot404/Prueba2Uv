@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.universales.prueba2.entity.Telefono;
-
+import com.universales.prueba2.entity.Usuario;
 import com.universales.prueba2.repository.TelefonoRepository;
 import com.universales.prueba2.wsint.TelefonoInt;
 
@@ -33,5 +33,10 @@ public class TelefonoImpl implements TelefonoInt {
 			telefonoRepository.delete(telefonos.get());
 		}
 		
+	}
+	
+	@Override
+	public List<Telefono>buscarPorIdTelefono(Integer idTelefono){
+		return telefonoRepository.findByidTelefono(idTelefono);
 	}
 }

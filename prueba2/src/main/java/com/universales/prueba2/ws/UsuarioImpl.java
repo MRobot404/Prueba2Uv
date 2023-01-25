@@ -87,4 +87,9 @@ public class UsuarioImpl implements UsuarioInt{
 	public List<Usuario>buscarPorNombreYApellido(String nombre, String apellido){
 		return usuarioRepository.findByNombreAndApellido(nombre, apellido);
 	}
+	
+	@Override
+	public List<Usuario>buscarPorIdUsuario(Integer idUsuario){
+		return usuarioRepository.findByidUsuario(idUsuario);
+	}
 }

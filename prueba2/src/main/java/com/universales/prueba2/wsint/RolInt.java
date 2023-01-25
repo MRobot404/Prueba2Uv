@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.universales.prueba2.entity.Correo;
 import com.universales.prueba2.entity.Rol;
 
 @RestController
@@ -26,5 +27,8 @@ public interface RolInt {
 	
 	@DeleteMapping(path="/eliminar/{id_rol}")
 	public void eliminar(@PathVariable ("id_rol")Integer id_rol);
+	
+	@GetMapping(path="/buscar/por/{idRol}")
+	public List<Rol> buscarPorIdRol(@PathVariable Integer idRol);
 
 }

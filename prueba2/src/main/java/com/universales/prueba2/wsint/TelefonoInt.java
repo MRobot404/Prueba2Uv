@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universales.prueba2.entity.Telefono;
+import com.universales.prueba2.entity.Usuario;
 
 @RestController
 @RequestMapping("/telefonos")
@@ -26,4 +27,7 @@ public interface TelefonoInt {
 	
 	@DeleteMapping(path="/eliminar/{id_telefono}")
 	public void eliminar(@PathVariable ("id_telefono")Integer id_telefono);
+	
+	@GetMapping(path="/buscar/por/{idTelefono}")
+	public List<Telefono>buscarPorIdTelefono(@PathVariable Integer idTelefono);
 }

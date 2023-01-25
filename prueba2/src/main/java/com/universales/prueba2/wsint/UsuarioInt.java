@@ -30,4 +30,7 @@ public interface UsuarioInt {
 	
 	@GetMapping(path="/buscar/por/{nombre}/{apellido}")
 	public List<Usuario>buscarPorNombreYApellido(@PathVariable String nombre,@PathVariable String apellido);
+	
+	@GetMapping(path="/buscar/porr/{idUsuario}")
+	public List<Usuario>buscarPorIdUsuario(@PathVariable Integer idUsuario);
 }
