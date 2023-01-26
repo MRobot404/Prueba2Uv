@@ -1,6 +1,9 @@
 package com.universales.prueba2.wsint;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +34,12 @@ public interface UsuarioInt {
 	@GetMapping(path="/buscar/por/{nombre}/{apellido}")
 	public List<Usuario>buscarPorNombreYApellido(@PathVariable String nombre,@PathVariable String apellido);
 	
+	@GetMapping(path="/consultar/nombre/{nombre}")
+	public List<Map<String,Object>>buscarporNombre(@PathVariable String nombre);
+	
 	@GetMapping(path="/buscar/porr/{idUsuario}")
 	public List<Usuario>buscarPorIdUsuario(@PathVariable Integer idUsuario);
+	
+	@GetMapping(path="buscar/por/fecha/{fecha}")
+	public List<Usuario>buscarPorFecha(@PathVariable Date fecha);
 }

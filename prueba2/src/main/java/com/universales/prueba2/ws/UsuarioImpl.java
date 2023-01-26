@@ -1,10 +1,13 @@
 package com.universales.prueba2.ws;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 import com.universales.prueba2.entity.Correo;
 import com.universales.prueba2.entity.Empleado;
@@ -14,7 +17,10 @@ import com.universales.prueba2.repository.CorreoRepository;
 import com.universales.prueba2.repository.EmpleadoRepository;
 import com.universales.prueba2.repository.TelefonoRepository;
 import com.universales.prueba2.repository.UsuarioRepository;
+import com.universales.prueba2.service.UsuarioService;
 import com.universales.prueba2.wsint.UsuarioInt;
+
+
 
 
 @Component
@@ -31,6 +37,9 @@ public class UsuarioImpl implements UsuarioInt{
 	
 	@Autowired
 	EmpleadoRepository empleadoRepository;
+	
+	@Autowired(required=true)
+	UsuarioService ps;
 	
 	@Override
 	public List<Usuario>buscarUsuario(){
@@ -91,5 +100,15 @@ public class UsuarioImpl implements UsuarioInt{
 	@Override
 	public List<Usuario>buscarPorIdUsuario(Integer idUsuario){
 		return usuarioRepository.findByidUsuario(idUsuario);
+	}
+	@Override
+	public List<Usuario>buscarPorFecha(Date fecha){
+		return usuarioRepository.findByFechaAfter(fecha);
+	}
+
+	@Override
+	public List<Map<String, Object>> buscarporNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return ps.buscarporNombre(nombre);
 	}
 }
