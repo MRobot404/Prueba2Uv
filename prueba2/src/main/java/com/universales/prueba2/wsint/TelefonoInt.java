@@ -1,18 +1,21 @@
 package com.universales.prueba2.wsint;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universales.prueba2.entity.Telefono;
 import com.universales.prueba2.entity.Usuario;
+import com.universales.prueba2.service.TelefonoService;
 
 @RestController
 @RequestMapping("/telefonos")
@@ -30,4 +33,7 @@ public interface TelefonoInt {
 	
 	@GetMapping(path="/buscar/por/{idTelefono}")
 	public List<Telefono>buscarPorIdTelefono(@PathVariable Integer idTelefono);
+
+
+	
 }

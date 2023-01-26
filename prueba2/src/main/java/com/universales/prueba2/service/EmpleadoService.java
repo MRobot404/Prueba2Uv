@@ -10,18 +10,16 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService {
+public class EmpleadoService {
+
 	
 	@Autowired
 	NamedParameterJdbcTemplate npjt;
 	
-	public List<Map<String,Object >>buscarporNombre(String nombre){
-		String query="select count(*) from usuario where nombre = :nom";
+	public List<Map<String,Object >>buscarporNombre(Integer idRol){
+		String query="SELECT c.nombre,c.apellido,a.area,a.rol from rol a join empleado b on a.id_rol = b.id_rol Join usuario c on c.id_usuario = b.id_usuario where a.id_rol= :idRol";
 		SqlParameterSource sps= new MapSqlParameterSource()
-				.addValue("nom", nombre);
+				.addValue("idRol",idRol );
 		return npjt.queryForList(query, sps);
 	}
-	
-
-
 }

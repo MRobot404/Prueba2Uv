@@ -65,6 +65,14 @@ SELECT * FROM ROL;
 SELECT * FROM TELEFONO;
 SELECT * FROM CORREO;
 
+select * from rol where id_rol=1;
+
+-- Joins
+SELECT c.nombre,a.area,a.rol from rol a join empleado b on a.id_rol = b.id_rol 
+Join usuario c on c.id_usuario = b.id_usuario
+where a.id_rol=1;
+
+
 --Secuencias
 DROP SEQUENCE TEST_SEQ24;
  CREATE SEQUENCE test_seq24

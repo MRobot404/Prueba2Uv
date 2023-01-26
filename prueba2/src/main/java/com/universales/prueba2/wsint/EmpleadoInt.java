@@ -1,6 +1,7 @@
 package com.universales.prueba2.wsint;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,4 +31,7 @@ public interface EmpleadoInt {
 	
 	@GetMapping(path="/buscar/por/{idEmpleado}")
 	public List<Empleado> buscarPorIdEmpleado(@PathVariable Integer idEmpleado);
+	
+	@GetMapping(path="/join/{idRol}")
+	public List<Map<String,Object>>buscarporNombre(@PathVariable Integer idRol);
 }
