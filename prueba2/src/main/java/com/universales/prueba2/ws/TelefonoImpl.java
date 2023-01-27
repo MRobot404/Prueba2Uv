@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,6 +15,8 @@ import com.universales.prueba2.entity.Usuario;
 import com.universales.prueba2.repository.TelefonoRepository;
 import com.universales.prueba2.service.TelefonoService;
 import com.universales.prueba2.wsint.TelefonoInt;
+
+import jakarta.transaction.Transactional;
 
 @Component
 public class TelefonoImpl implements TelefonoInt {
@@ -46,7 +50,12 @@ public class TelefonoImpl implements TelefonoInt {
 		return telefonoRepository.findByidTelefono(idTelefono);
 	}
 	
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> guardar2(Telefono telefono) {
+		// TODO Auto-generated method stub	
+		return ps.guardar2(telefono);
+	}
 	
 
 }

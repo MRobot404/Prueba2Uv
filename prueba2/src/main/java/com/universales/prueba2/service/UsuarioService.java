@@ -16,7 +16,7 @@ public class UsuarioService {
 	NamedParameterJdbcTemplate npjt;
 	
 	public List<Map<String,Object >>buscarporNombre(String nombre){
-		String query="select count(*) from usuario where nombre = :nom";
+		String query=" SELECT contar_usuarios_por_nombre(:nom) FROM DUAL";
 		SqlParameterSource sps= new MapSqlParameterSource()
 				.addValue("nom", nombre);
 		return npjt.queryForList(query, sps);

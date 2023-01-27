@@ -66,7 +66,30 @@ SELECT * FROM TELEFONO;
 SELECT * FROM CORREO;
 
 select * from rol where id_rol=1;
+UPDATE Telefono SET extension=1023 WHERE id_telefono=2;
+---procedimiento
+create or replace procedure ps_telefono_insertar
+(telefono in number default 0,extension in number default 0,id_usuario in number default 1)
+as
+begin
+    insert into telefono (telefono,extension,id_usuario) values(telefono,extension,id_usuario);
+    end;
+    
+    execute ps_telefono_insertar;
+/
 
+--Funcion
+create or replace function f_cuentausuario(nombre varchar)
+return number 
+is contador number(4);
+begin 
+    SELECT COUNT(*) 
+    from usuario where nombre = nombre;
+    return number;
+end;
+ 
+    
+    
 -- Joins
 SELECT c.nombre,a.area,a.rol from rol a join empleado b on a.id_rol = b.id_rol 
 Join usuario c on c.id_usuario = b.id_usuario
@@ -213,5 +236,7 @@ insert into CORREO (CORREO, ID_USUARIO) values ('lelwyn6@scientificamerican.com'
 insert into CORREO (CORREO, ID_USUARIO) values ('kdodsley7@kickstarter.com', 8);
 insert into CORREO (CORREO, ID_USUARIO) values ('tpinilla8@sun.com', 9);
 insert into CORREO (CORREO, ID_USUARIO) values ('kmulcaster9@marketwatch.com', 10);
+
+
 
 

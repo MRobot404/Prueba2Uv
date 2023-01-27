@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.universales.prueba2.entity.Telefono;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -21,15 +22,17 @@ public  class TelefonoService {
 	
 	@Autowired
 	NamedParameterJdbcTemplate npjt;
+	public Object telefonoRepository;
 	
-	
-	public List<Map<String,Object>>Guardartelefono(Integer telefono,Integer extension,Integer idUsuario){
-		String query="insert telefono (telefono,extension,id_usuario) values (:telefono, :extension, :idUsuario)";
+	public List<Map<String, Object>> guardar2(Telefono telefono){
+		String query="insert into telefono (telefono,extension,id_usuario) values  (:telefono,:extension,:id_usuario)";
+		Integer tel=0,ext=0,idU=0;
 		SqlParameterSource sps= new MapSqlParameterSource()
-				.addValue("telefono", telefono)
-				.addValue("extension", extension)
-				.addValue("idUsuario", idUsuario);
+				.addValue("telefono", tel)
+				.addValue("extension", ext)
+				.addValue("id_usuario", idU);
 		return npjt.queryForList(query, sps);
 	}
+
 }
 
