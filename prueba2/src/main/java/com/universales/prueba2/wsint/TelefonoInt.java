@@ -34,7 +34,11 @@ public interface TelefonoInt {
 	@GetMapping(path="/buscar/por/{idTelefono}")
 	public List<Telefono>buscarPorIdTelefono(@PathVariable Integer idTelefono);
 
-	@PostMapping(path="/guardar2")
-	public List<Map<String,Object>>guardar2(@RequestBody Telefono telefono);
+	@PostMapping("/guardar2")
+	public void insertarTelefono(@RequestBody Telefono telefono);
+
+
+
 	
+		
 }

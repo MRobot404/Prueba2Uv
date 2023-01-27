@@ -65,29 +65,32 @@ SELECT * FROM ROL;
 SELECT * FROM TELEFONO;
 SELECT * FROM CORREO;
 
-select * from rol where id_rol=1;
+select count(*) from rol where id_rol=1;
+ SELECT COUNT(*) from usuario where nombre = 'Arnoldo';
 UPDATE Telefono SET extension=1023 WHERE id_telefono=2;
 ---procedimiento
-create or replace procedure ps_telefono_insertar
-(telefono in number default 0,extension in number default 0,id_usuario in number default 1)
-as
-begin
-    insert into telefono (telefono,extension,id_usuario) values(telefono,extension,id_usuario);
-    end;
+    create or replace procedure ps_telefono_insertar
+    (telefono in number default 0,extension in number default 0,id_usuario in number default 1)
+    as
+    begin
+        insert into telefono (telefono,extension,id_usuario) values(telefono,extension,id_usuario);
+        end;
     
-    execute ps_telefono_insertar;
+    execute ps_telefono_insertar(1,1,1);
 /
 
 --Funcion
-create or replace function f_cuentausuario(nombre varchar)
-return number 
-is contador number(4);
-begin 
-    SELECT COUNT(*) 
-    from usuario where nombre = nombre;
-    return number;
-end;
- 
+CREATE OR REPLACE FUNCTION contar_usuarios_por_nombre (p_nombre usuario.nombre%TYPE)
+RETURN NUMBER
+AS
+  v_result NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_result FROM usuario WHERE nombre = p_nombre;
+  RETURN v_result;
+END;    
+
+ SELECT contar_usuarios_por_nombre('Juan') FROM DUAL;
+
     
     
 -- Joins

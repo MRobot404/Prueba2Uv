@@ -50,12 +50,11 @@ public class TelefonoImpl implements TelefonoInt {
 		return telefonoRepository.findByidTelefono(idTelefono);
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	@Override
-	public List<Map<String, Object>> guardar2(Telefono telefono) {
-		// TODO Auto-generated method stub	
-		return ps.guardar2(telefono);
-	}
+	 public void insertarTelefono(@RequestBody Telefono telefono) {
+        ps.insertTelefono(telefono);
+    }
 	
 
 }
