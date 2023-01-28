@@ -3,12 +3,20 @@ package com.universales.prueba2.ws;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.universales.prueba2.entity.Telefono;
 import com.universales.prueba2.entity.Usuario;
@@ -54,7 +62,21 @@ public class TelefonoImpl implements TelefonoInt {
 	@Override
 	 public void insertarTelefono(@RequestBody Telefono telefono) {
         ps.insertTelefono(telefono);
-    }
+   }
+	
+	@Override
+	 public List<Telefono>getTelefonos(int page,int size) {
+		 Pageable pageable = PageRequest.of(page, size);
+		 Page<Telefono> telefonos = telefonoRepository.findAll(pageable);
+	        return telefonos.stream().map(telefono -> {
+	            Telefono dto = new Telefono();
+	            dto.setIdTelefono(telefono.getIdTelefono());
+	            dto.setTelefono(telefono.getTelefono());
+	            dto.setExtension(telefono.getExtension());
+	            dto.setIdUsuario(telefono.getIdUsuario());
+	            return dto;
+	        }).collect(Collectors.toList());
+}
 	
 
 }
