@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universales.prueba2.entity.Usuario;
@@ -42,4 +43,7 @@ public interface UsuarioInt {
 	
 	@GetMapping(path="buscar/por/fecha/{fecha}")
 	public List<Usuario>buscarPorFecha(@PathVariable Date fecha);
+
+	@GetMapping("/paginar")
+	List<Usuario> getUsuario(@RequestParam ("page") int page, @RequestParam ("size")  int size);
 }

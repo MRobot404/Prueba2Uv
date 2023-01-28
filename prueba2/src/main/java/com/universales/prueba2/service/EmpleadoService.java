@@ -17,7 +17,7 @@ public class EmpleadoService {
 	NamedParameterJdbcTemplate npjt;
 	
 	public List<Map<String,Object >>buscarporNombre(Integer idRol){
-		String query="SELECT c.nombre,c.apellido,a.area,a.rol from rol a join empleado b on a.id_rol = b.id_rol Join usuario c on c.id_usuario = b.id_usuario where a.id_rol= :idRol";
+	String query="SELECT c.nombre,c.apellido,a.area,a.rol from rol a join empleado b on a.id_rol = b.id_rol Join usuario c on c.id_usuario = b.id_usuario where a.id_rol= :idRol";
 		SqlParameterSource sps= new MapSqlParameterSource()
 				.addValue("idRol",idRol );
 		return npjt.queryForList(query, sps);

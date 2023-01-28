@@ -1,7 +1,6 @@
 package com.universales.prueba2.ws;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -9,22 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import com.universales.prueba2.entity.Telefono;
-import com.universales.prueba2.entity.Usuario;
+
 import com.universales.prueba2.repository.TelefonoRepository;
 import com.universales.prueba2.service.TelefonoService;
 import com.universales.prueba2.wsint.TelefonoInt;
 
-import jakarta.transaction.Transactional;
 
 @Component
 public class TelefonoImpl implements TelefonoInt {
