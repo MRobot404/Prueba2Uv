@@ -1,10 +1,10 @@
 package com.universales.prueba2.wsint;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,9 +41,13 @@ public interface UsuarioInt {
 	@GetMapping(path="/buscar/porr/{idUsuario}")
 	public List<Usuario>buscarPorIdUsuario(@PathVariable Integer idUsuario);
 	
-	@GetMapping(path="buscar/por/fecha/{fecha}")
-	public List<Usuario>buscarPorFecha(@PathVariable Date fecha);
+	@GetMapping(path="buscar/por/fecha/")
+	public List<Usuario>buscarPorFecha(@RequestParam("fecha") @DateTimeFormat(pattern="yyyy-MM-dd") Date fecha);
 
 	@GetMapping("/paginar")
 	List<Usuario> getUsuario(@RequestParam ("page") int page, @RequestParam ("size")  int size);
+	
+	 @GetMapping("/cumpleanios")
+	public List<Usuario> getUsuariosByFechaBetween(@RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, 
+	                                               @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin);
 }

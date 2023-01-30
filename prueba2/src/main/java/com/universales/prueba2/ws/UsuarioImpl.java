@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.universales.prueba2.entity.Correo;
 import com.universales.prueba2.entity.Empleado;
@@ -132,4 +133,10 @@ public class UsuarioImpl implements UsuarioInt{
 			return dto;
 		}).collect(Collectors.toList());
 	}
+	
+	@Override
+	  public List<Usuario> getUsuariosByFechaBetween(@RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, 
+	                                                  @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
+	    return usuarioRepository.findByFechaBetween(fechaInicio, fechaFin);
+	  }
 }

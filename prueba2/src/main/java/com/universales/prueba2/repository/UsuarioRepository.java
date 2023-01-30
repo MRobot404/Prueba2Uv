@@ -15,4 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Serializable>,
 	public List<Usuario> findByNombreAndApellido(String nombre, String apellido);
 	public List<Usuario> findByidUsuario(int idUsuario);
 	public List<Usuario> findByFechaAfter(Date fecha);
+	public List<Usuario> findByFechaBetween(Date fechaInicio, Date fechaFin);
 }
