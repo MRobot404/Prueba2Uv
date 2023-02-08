@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.universales.prueba2.entity.Correo;
 import com.universales.prueba2.entity.Empleado;
@@ -31,25 +29,60 @@ import com.universales.prueba2.wsint.UsuarioInt;
 @Component
 public class UsuarioImpl implements UsuarioInt{
 
+	
+	/**
+	 * Inyección de dependencia de UsuarioRepository para el manejo de operaciones CRUD en la tabla usuario.
+	 */
+	
 	@Autowired
 	UsuarioRepository usuarioRepository;
+	
+	/**
+	 * Inyección de dependencia de TelefonoRepository para el manejo de operaciones CRUD en la tabla telefono.
+	 */
 	
 	@Autowired
 	TelefonoRepository telefonoRepository;
 	
+	/**
+	 * Inyección de dependencia de CorreoRepository para el manejo de operaciones CRUD en la tabla correo.
+	 */
+	
 	@Autowired
 	CorreoRepository correoRepository;
+	
+	/**
+	 * Inyección de dependencia de EmpleadoRepository para el manejo de operaciones CRUD en la tabla empleado.
+	 */
 	
 	@Autowired
 	EmpleadoRepository empleadoRepository;
 	
+	/**
+	 * Inyección de dependencia de UsuarioService para el manejo de operaciones CRUD en la tabla usuario.
+	 */
+	
 	@Autowired(required=true)
 	UsuarioService ps;
+	
+	/**
+	 * Método que busca todos los usuarios registrados en la tabla usuario.
+	 * 
+	 * @return Una lista con todos los usuarios encontrados en la tabla usuario.
+	 */
 	
 	@Override
 	public List<Usuario>buscarUsuario(){
 		return usuarioRepository.findAll();
 	}
+	
+	/**
+	 * Método que guarda un nuevo usuario en la tabla usuario y sus respectivos telefonos, correos y empleados en las tablas correspondientes.
+	 * 
+	 * @param usuario Usuario a ser guardado en la tabla usuario.
+	 * 
+	 * @return El usuario guardado en la tabla usuario.
+	 */
 	
 	@Override
 	public Usuario guardar(Usuario usuario) {
@@ -85,6 +118,12 @@ public class UsuarioImpl implements UsuarioInt{
 		return usuario;
 	}
 	
+	/**
+	 * Método para eliminar un usuario por su identificador.
+	 * 
+	 * @param id_usuario identificador del usuario a eliminar.
+	 */
+	
 	@Override
 	public void eliminar(Integer id_usuario) {
 		Optional <Usuario> usuarios =  usuarioRepository.findById(id_usuario);
@@ -96,26 +135,70 @@ public class UsuarioImpl implements UsuarioInt{
 		}
 		
 	}
+	
+	/**
+	 * Método para buscar usuarios por su nombre y apellido.
+	 * 
+	 * @param nombre nombre del usuario a buscar.
+	 * @param apellido apellido del usuario a buscar.
+	 * 
+	 * @return lista de usuarios con el nombre y apellido especificados.
+	 */
 
 	@Override
 	public List<Usuario>buscarPorNombreYApellido(String nombre, String apellido){
 		return usuarioRepository.findByNombreAndApellido(nombre, apellido);
 	}
 	
+	/**
+	 * Método para buscar usuarios por su identificador.
+	 * 
+	 * @param idUsuario identificador del usuario a buscar.
+	 * 
+	 * @return lista de usuarios con el identificador especificado.
+	 */
+	
 	@Override
 	public List<Usuario>buscarPorIdUsuario(Integer idUsuario){
 		return usuarioRepository.findByidUsuario(idUsuario);
 	}
+	
+	/**
+	 * Método para buscar usuarios por una fecha específica.
+	 * 
+	 * @param fecha fecha a partir de la cual se buscarán usuarios.
+	 * 
+	 * @return lista de usuarios creados después de la fecha especificada.
+	 */
+	
 	@Override
 	public List<Usuario>buscarPorFecha(Date fecha){
 		return usuarioRepository.findByFechaAfter(fecha);
 	}
+	
+	/**
+	 * Método para buscar usuarios por nombre.
+	 * 
+	 * @param nombre nombre del usuario a buscar.
+	 * 
+	 * @return lista de mapas con la información de los usuarios encontrados.
+	 */
 
 	@Override
 	public List<Map<String, Object>> buscarporNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return ps.buscarporNombre(nombre);
 	}
+	
+	/**
+	* Método para obtener una lista de usuarios
+	* 
+	* @param page número de página
+	* 
+	* @param size tamaño de página
+	* 
+	* @return Lista de usuarios en forma de objetos Usuario
+	*/
 	
 	@Override
 	public List<Usuario>getUsuario(int page,int size){
@@ -134,9 +217,5 @@ public class UsuarioImpl implements UsuarioInt{
 		}).collect(Collectors.toList());
 	}
 	
-	@Override
-	  public List<Usuario> getUsuariosByFechaBetween(@RequestParam("fechaInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, 
-	                                                  @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
-	    return usuarioRepository.findByFechaBetween(fechaInicio, fechaFin);
-	  }
+	
 }
