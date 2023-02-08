@@ -1,5 +1,6 @@
 package com.universales.prueba2.ws;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
-
+import com.universales.prueba2.security.JwtGeneratorInterface;
 import com.universales.prueba2.entity.Empleado;
 import com.universales.prueba2.repository.EmpleadoRepository;
 import com.universales.prueba2.service.EmpleadoService;
@@ -21,6 +25,9 @@ public class EmpleadoImpl implements EmpleadoInt {
 	
 	@Autowired
 	EmpleadoRepository empleadoRepository;
+	
+	@Autowired
+	JwtGeneratorInterface jwtGenerator;
 	
 	@Autowired(required=true)
 	EmpleadoService ps;
@@ -109,7 +116,34 @@ public class EmpleadoImpl implements EmpleadoInt {
 			dto.setIdEmpleado(empleado.getIdEmpleado());
 			dto.setIdUsuario(empleado.getIdUsuario());
 			dto.setRol(empleado.getRol());
+			dto.setContrasena(empleado.getContrasena());
 			return dto;
 		}).collect(Collectors.toList());
 	}
+	
+	@Override
+	  public ResponseEntity<?> loginUser(@RequestBody Empleado empleado) {
+		    try {
+		      if(empleado.getCodigo() == null ||empleado.getContrasena() == null) {
+		      throw new UserPrincipalNotFoundException("Usuario o contraseña vacio");
+		    }
+		    Empleado userData = getEmpleadoByCodigoAndContrasena(empleado.getCodigo(), empleado.getContrasena());
+		    if(userData == null){
+		       throw new UserPrincipalNotFoundException("Usuario o contraseña incorrectos");
+		    }
+		       return new ResponseEntity<>(jwtGenerator.generateToken(empleado), HttpStatus.OK);
+		    } catch (UserPrincipalNotFoundException e) {
+		       return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+		    }
+		  }
+	
+	
+	@Override
+	public Empleado getEmpleadoByCodigoAndContrasena(Integer codigo,String contrasena)  throws UserPrincipalNotFoundException {
+	   Empleado user = empleadoRepository.findByCodigoAndContrasena(codigo,contrasena);
+	    if(user == null){
+	       throw new UserPrincipalNotFoundException("Usuario o password invalido");
+	    }
+	    return user;
+	  }
 }

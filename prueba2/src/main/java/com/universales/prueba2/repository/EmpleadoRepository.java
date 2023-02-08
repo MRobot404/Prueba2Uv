@@ -9,4 +9,6 @@ import com.universales.prueba2.entity.Empleado;
 
 public interface EmpleadoRepository extends JpaRepository<Empleado, Serializable>{
 List<Empleado>findByIdEmpleado(int idEmpleado);
+
+public Empleado findByCodigoAndContrasena(Integer codigo, String contrasena);
 }

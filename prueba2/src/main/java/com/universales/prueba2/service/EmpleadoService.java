@@ -22,4 +22,6 @@ public class EmpleadoService {
 				.addValue("idRol",idRol );
 		return npjt.queryForList(query, sps);
 	}
+	
+
 }

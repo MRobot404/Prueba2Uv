@@ -36,6 +36,9 @@ public class Empleado implements Serializable{
 	
 	@Column(name = "CODIGO")
 	private Integer codigo;
+
+	@Column(name="CONTRASENA")
+	private String contrasena;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_ROL")
@@ -71,6 +74,16 @@ public class Empleado implements Serializable{
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	
+	
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public static long getSerialversionuid() {
